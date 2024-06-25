@@ -55,10 +55,6 @@ typedef enum
  * sender sends queries, is 224.0.0.252.*/
 #define FNET_LLMNR_IP4_MULTICAST_ADDR   FNET_IP4_ADDR_INIT(224u, 0u, 0u, 252u)
 
-/* RFC 4795: The IPv6 link-scope multicast address a given responder listens to,
- * and to which a sender sends all queries, is FF02:0:0:0:0:0:1:3.*/
-static const fnet_ip6_addr_t fnet_llmnr_ip6_multicast_addr = FNET_IP6_ADDR_INIT(0xFF, 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, 0x00, 0x03);
-
 /* Error strings.*/
 #define FNET_LLMNR_ERR_PARAMS            "LLMNR: Wrong input parameters."
 #define FNET_LLMNR_ERR_SOCKET_CREATION   "LLMNR: Socket creation error."

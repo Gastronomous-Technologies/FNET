@@ -1059,7 +1059,7 @@ MBEDTLSFLASHMEM void ssl_calc_verify_ssl( mbedtls_ssl_context *ssl, unsigned cha
 #endif /* MBEDTLS_SSL_PROTO_SSL3 */
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1) || defined(MBEDTLS_SSL_PROTO_TLS1_1)
-MBEDTLSFLASHMEM void ssl_calc_verify_tls( mbedtls_ssl_context *ssl, unsigned char hash[36] )
+MBEDTLSFLASHMEM void ssl_calc_verify_tls( mbedtls_ssl_context *ssl, unsigned char *hash )
 {
     mbedtls_md5_context md5;
     mbedtls_sha1_context sha1;
@@ -1087,7 +1087,7 @@ MBEDTLSFLASHMEM void ssl_calc_verify_tls( mbedtls_ssl_context *ssl, unsigned cha
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1_2)
 #if defined(MBEDTLS_SHA256_C)
-MBEDTLSFLASHMEM void ssl_calc_verify_tls_sha256( mbedtls_ssl_context *ssl, unsigned char hash[32] )
+MBEDTLSFLASHMEM void ssl_calc_verify_tls_sha256( mbedtls_ssl_context *ssl, unsigned char *hash )
 {
     mbedtls_sha256_context sha256;
 
@@ -1108,7 +1108,7 @@ MBEDTLSFLASHMEM void ssl_calc_verify_tls_sha256( mbedtls_ssl_context *ssl, unsig
 #endif /* MBEDTLS_SHA256_C */
 
 #if defined(MBEDTLS_SHA512_C)
-MBEDTLSFLASHMEM void ssl_calc_verify_tls_sha384( mbedtls_ssl_context *ssl, unsigned char hash[48] )
+MBEDTLSFLASHMEM void ssl_calc_verify_tls_sha384( mbedtls_ssl_context *ssl, unsigned char *hash )
 {
     mbedtls_sha512_context sha512;
 
@@ -5346,7 +5346,7 @@ MBEDTLSFLASHMEM static void ssl_calc_finished_tls_sha384(
     int len = 12;
     const char *sender;
     mbedtls_sha512_context sha512;
-    unsigned char padbuf[48];
+    unsigned char padbuf[64];
 
     mbedtls_ssl_session *session = ssl->session_negotiate;
     if( !session )
